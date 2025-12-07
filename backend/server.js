@@ -5,10 +5,12 @@ const cors = require('cors');
 const cinemaRoutes = require('./routes/cinemas');
 const movieRoutes = require('./routes/movies');
 const showtimeRoutes = require('./routes/showtimes');
+const movieDetailRoutes = require("./routes/movies");
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use("/api/movies", movieDetailRoutes);
 
 const PORT = process.env.PORT || 3000;
 
