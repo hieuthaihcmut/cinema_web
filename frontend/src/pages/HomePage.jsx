@@ -1,107 +1,61 @@
+// src/pages/HomePage.jsx
 import React, { useEffect, useState } from "react";
-import "./HomePage.css";
-import { useNavigate } from "react-router-dom";
-import { getMovies } from "../api";
+import { Link } from "react-router-dom";
 
 function HomePage() {
     const [movies, setMovies] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState("");
-    const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchMovies = async () => {
-            try {
-                // Use shared API client (proxied by Vite to backend)
-                const data = await getMovies();
-                setMovies(data);
-            } catch (err) {
-                console.error(err);
-                setError(err.message || "Something went wrong");
-            } finally {
-                setLoading(false);
-            }
-        };
-
+        async function fetchMovies() {
+            const res = await fetch("http://localhost:3000/api/movies");
+            const data = await res.json();
+            setMovies(data);
+        }
         fetchMovies();
     }, []);
 
-    if (loading) {
-        return <div className="home-page">Loading movies...</div>;
-    }
-
-    if (error) {
-        return <div className="home-page error">Error: {error}</div>;
-    }
-
     return (
-        <div className="home-page">
-            <header className="home-header">
-                <h1>Cinema</h1>
-                <h2>Now Showing</h2>
-            </header>
+        <div>
+            <h1>Movie List</h1>
 
-            {movies.length === 0 ? (
-                <p className="empty-text">No movies currently showing.</p>
-            ) : (
-                <div className="movie-grid">
-                    {movies.map((movie) => (
-                        <div className="movie-card" key={movie.MovieID}>
-                            {movie.PosterURL ? (
-                                <img
-                                    src={movie.PosterURL}
-                                    alt={movie.Title}
-                                    className="movie-poster"
-                                />
-                            ) : (
-                                <div className="movie-poster placeholder">
-                                    No Poster
-                                </div>
-                            )}
+            <table border="1" cellPadding="8">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>AgeRating</th>
+                        <th>ReleaseDate</th>
+                        <th>Duration</th>
+                        <th>CustomerRating</th>
+                        <th>Language</th>
+                        <th>Description</th>
+                        <th>Studio</th>
+                        <th>Country</th>
+                        <th>Director</th>
+                        <th>Detail</th>
+                    </tr>
+                </thead>
 
-                            <div className="movie-info">
-                                <h3 className="movie-title">{movie.Title}</h3>
+                <tbody>
+                    {movies.map((m) => (
+                        <tr key={m.MovieID}>
+                            <td>{m.Title}</td>
+                            <td>{m.AgeRating}</td>
+                            <td>{m.ReleaseDate?.slice(0, 10)}</td>
+                            <td>{m.Duration}</td>
+                            <td>{m.CustomerRating}</td>
+                            <td>{m.Language}</td>
+                            <td>{m.Description}</td>
+                            <td>{m.Studio}</td>
+                            <td>{m.Country}</td>
+                            <td>{m.Director}</td>
 
-                                <div className="movie-meta">
-                                    <span className="badge">{movie.AgeRating}</span>
-                                    <span>{movie.Duration} min</span>
-                                    {movie.CustomerRating != null && (
-                                        <span>⭐ {movie.CustomerRating}</span>
-                                    )}
-                                </div>
-
-                                <p className="movie-genre">
-                                    {movie.Genre} · {movie.Language}
-                                </p>
-
-                                {movie.Description && (
-                                    <p className="movie-description">
-                                        {movie.Description.length > 120
-                                            ? movie.Description.slice(0, 120) + "..."
-                                            : movie.Description}
-                                    </p>
-                                )}
-
-                                <p className="movie-extra">
-                                    <strong>Director:</strong> {movie.Director}
-                                    <br />
-                                    <strong>Studio:</strong> {movie.Studio}
-                                    <br />
-                                    <strong>Country:</strong> {movie.Country}
-                                </p>
-
-                                {/* Ví dụ nút xem chi tiết / đặt vé */}
-                                <button
-                                    className="movie-button"
-                                    onClick={() => navigate(`/movie/${movie.MovieID}`)}
-                                >
-                                    View Detail
-                                </button>
-                            </div>
-                        </div>
+                            <td>
+                                <Link to={`/movies/${m.MovieID}`}>View</Link>
+                            </td>
+                        </tr>
                     ))}
-                </div>
-            )}
+                </tbody>
+            </table>
         </div>
     );
 }

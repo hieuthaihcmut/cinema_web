@@ -8,7 +8,9 @@ export default defineConfig({
         proxy: {
             '/cinemas': 'http://localhost:3000',
             '/movies': 'http://localhost:3000',
-            '/showtimes': 'http://localhost:3000'
+            '/showtimes': 'http://localhost:3000',
+            '/customers': 'http://localhost:3000',
+            '/customer': 'http://localhost:3000',
         }
     }
 })
