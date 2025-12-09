@@ -4,6 +4,9 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 import Movie from './pages/Movies.jsx';
 import Customer from './pages/Customer.jsx';   // 👈 nhớ đường dẫn đúng
+import RoomTicketsReport from './pages/tickets.jsx';
+import TopMoviesReportPage from './pages/score.jsx';
+import SeatAvailabilityPage from './pages/seat.jsx';
 
 function App() {
     return (
@@ -18,11 +21,17 @@ function App() {
             >
                 <Link to="/">Movie</Link>
                 <Link to="/customers">Customer</Link>  {/* 👈 THÊM LINK Ở ĐÂY */}
+                <Link to="/tickets">Tickets</Link>
+                <Link to="/score">TopMovie</Link>
+                <Link to="/seat">Seat</Link>
             </nav>
 
             <Routes>
                 <Route path="/" element={<Movie />} />
-                <Route path="/customers" element={<Customer />} /> {/* 👈 THÊM ROUTE Ở ĐÂY */}
+                <Route path="/customers" element={<Customer />} />
+                <Route path="/tickets" element={<RoomTicketsReport />} />
+                <Route path="/score" element={<TopMoviesReportPage />} />
+                <Route path="/seat" element={<SeatAvailabilityPage />} />
             </Routes>
         </BrowserRouter>
     );

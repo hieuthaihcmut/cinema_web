@@ -1,200 +1,157 @@
-USE Cinema;
-GO
-
 -----------------------------------------------------
 -- 1. CINEMA
 -----------------------------------------------------
 INSERT INTO Cinema (CinemaID, Name, Location, OpeningHours, ClosingHours)
 VALUES
-(1, N'Rạp A', N'Địa chỉ 01', '08:00', '22:00'),
-(2, N'Rạp B', N'Địa chỉ 02', '09:00', '23:00'),
-(3, N'Rạp C', N'Địa chỉ 03', '08:30', '22:30'),
-(4, N'Rạp D', N'Địa chỉ 04', '09:00', '23:00'),
-(5, N'Rạp E', N'Địa chỉ 05', '08:00', '22:00');
-
-
+(1, N'CGV Aeon Tân Phú', N'30 Bờ Bao Tân Thắng, Tân Phú, TP.HCM', '08:00', '23:00'),
+(2, N'Galaxy Nguyễn Du', N'116 Nguyễn Du, Quận 1, TP.HCM', '08:30', '23:30'),
+(3, N'Lotte Gò Vấp', N'242 Nguyễn Văn Lượng, Gò Vấp, TP.HCM', '09:00', '22:30'),
+(4, N'BHD Bitexco', N'2 Hải Triều, Quận 1, TP.HCM', '09:00', '23:00'),
+(5, N'CGV Vincom Thủ Đức', N'216 Võ Văn Ngân, Thủ Đức, TP.HCM', '08:00', '23:00');
 -----------------------------------------------------
 -- 2. CINEMAPHONE
 -----------------------------------------------------
-INSERT INTO CinemaPhone (CinemaID, PhoneNumber)
-VALUES
-(1, '0900000001'),
-(2, '0900000002'),
-(3, '0900000003'),
-(4, '0900000004'),
-(5, '0900000005');
-
-
+INSERT INTO CinemaPhone VALUES
+(1, N'02838121234'),
+(1, N'0909111222'),
+(2, N'02839234567'),
+(3, N'02839898888'),
+(4, N'02862629999'),
+(5, N'02837225555');
 -----------------------------------------------------
 -- 3. ROOM
 -----------------------------------------------------
-INSERT INTO Room (RoomID, CinemaID, Type, Capacity, Status)
-VALUES
-(1, 1, N'2D', 120, N'Đang hoạt động'),
-(2, 2, N'3D', 150, N'Đang hoạt động'),
-(3, 3, N'IMAX', 200, N'Đang hoạt động'),
-(4, 4, N'4D', 80, N'Bảo trì'),
-(5, 5, N'2D', 100, N'Tạm ngưng');
-
-
+INSERT INTO Room (RoomID, CinemaID, Type, Capacity, Status) VALUES
+(1, 1, N'2D', 120, N'Hoạt động'),
+(2, 1, N'3D', 150, N'Hoạt động'),
+(3, 2, N'2D', 100, N'Hoạt động'),
+(4, 3, N'IMAX', 200, N'Hoạt động'),
+(5, 4, N'2D', 130, N'Bảo trì'),
+(6, 5, N'3D', 160, N'Hoạt động');
 -----------------------------------------------------
 -- 4. SCREEN (1–1 với ROOM)
 -----------------------------------------------------
-INSERT INTO Screen (ScreenID, RoomID, Type, Size, SupportFormat)
-VALUES
-(1, 1, N'Tiêu chuẩn', N'50 inch', N'2D'),
-(2, 2, N'Tiêu chuẩn', N'70 inch', N'2D,3D'),
-(3, 3, N'IMAX',       N'120 inch', N'2D,3D'),
-(4, 4, N'4DX',        N'90 inch',  N'2D,4D'),
-(5, 5, N'LED',        N'65 inch',  N'2D');
-
-
+INSERT INTO Screen VALUES
+(1, 1, N'LED', N'20m x 12m', N'Dolby'),
+(2, 2, N'Laser', N'22m x 14m', N'IMAX'),
+(3, 3, N'LED', N'15m x 10m', N'Standard'),
+(4, 4, N'IMAX', N'25m x 18m', N'IMAX'),
+(5, 5, N'LED', N'18m x 12m', N'Dolby');
 -----------------------------------------------------
 -- 5. SEAT
 -----------------------------------------------------
-INSERT INTO Seat (SeatNumber, RoomID, SeatType, BasePrice)
-VALUES
-(N'A1', 1, N'Thường', 70000),
-(N'A2', 1, N'Thường', 70000),
-(N'B1', 2, N'VIP', 90000),
-(N'C1', 3, N'Đôi', 120000),
-(N'D1', 3, N'Thường', 80000);
-
-
+INSERT INTO Seat VALUES
+(N'A1', 1, N'Thường', 90000),
+(N'A2', 1, N'Thường', 90000),
+(N'B1', 1, N'VIP', 120000),
+(N'C1', 2, N'Thường', 100000),
+(N'C2', 2, N'Thường', 100000),
+(N'D1', 3, N'VIP', 130000),
+(N'E1', 4, N'IMAX', 150000);
 -----------------------------------------------------
 -- 6. CUSTOMER
 -----------------------------------------------------
-INSERT INTO Customer
-(CustomerID, FullName, Email, PhoneNumber, DateOfBirth, MembershipLevel, RegistrationDate, TotalSpent, TotalOrders)
-VALUES
-(1, N'Nguyễn Văn A', 'user01@example.com', '0901111111', '2000-01-01', N'Thường', '2024-01-10', 0, 0),
-(2, N'Trần Thị B',   'user02@example.com', '0902222222', '2001-02-02', N'VIP',     '2024-01-11', 0, 0),
-(3, N'Lê Văn C',     'user03@example.com', '0903333333', '2002-03-03', N'Thường', '2024-01-12', 0, 0),
-(4, N'Phạm Thị D',   'user04@example.com', '0904444444', '2003-04-04', N'VIP',     '2024-01-13', 0, 0),
-(5, N'Hoàng Văn E',  'user05@example.com', '0905555555', '2004-05-05', N'Thường', '2024-01-14', 0, 0);
-
-
+INSERT INTO Customer VALUES
+(1, N'Nguyễn Văn An', N'an@gmail.com', N'0901234567', '2001-05-21', N'Gold', '2023-01-01', 2000000, 12),
+(2, N'Trần Thị Mai', N'mai@gmail.com', N'0902345678', '2000-11-02', N'Silver', '2023-03-12', 1500000, 9),
+(3, N'Lê Hoàng Phúc', N'phuc@gmail.com', N'0903456789', '1999-07-15', N'Bronze', '2023-05-02', 800000, 5),
+(4, N'Huỳnh Như', N'nhu@gmail.com', N'0909123456', '2003-12-21', N'Gold', '2023-07-22', 3000000, 15),
+(5, N'Phạm Minh Tuấn', N'tuan@gmail.com', N'0909988776', '1998-02-10', N'Silver', '2024-01-11', 1200000, 7),
+(6, N'Đào Minh Tuấn', N'tuan1@gmail.com', N'0909988777', '1998-02-10', N'Silver', '2024-01-11', 0, 0);
 -----------------------------------------------------
 -- 7. MOVIE
 -----------------------------------------------------
-INSERT INTO Movie
-(MovieID, Title, AgeRating, ReleaseDate, Duration, CustomerRating, Genre, Language, Description, Studio, Country, PosterURL, Director)
-VALUES
-(1, N'Phim A', 'PG',    '2020-01-01', 120, 2.1, N'Hành động', N'VN', N'Mô tả A', N'Studio A', N'VN',  N'Đạo diễn A'),
-(2, N'Phim B', 'PG-13', '2020-02-01', 110, 1.9, N'Hài',        N'VN', N'Mô tả B', N'Studio B', N'VN',  N'Đạo diễn B'),
-(3, N'Phim C', 'R',     '2020-03-01', 130, 7.2, N'Kinh dị',    N'VN', N'Mô tả C', N'Studio C', N'VN', N'Đạo diễn C'),
-(4, N'Phim D', 'G',     '2020-04-01',  95, 3.9, N'Hoạt hình',  N'VN', N'Mô tả D', N'Studio D', N'VN',  N'Đạo diễn D'),
-(5, N'Phim E', 'PG',    '2020-05-01', 105, 9.9, N'Lãng mạn',   N'VN', N'Mô tả E', N'Studio E', N'VN',  N'Đạo diễn E');
-
-
+INSERT INTO Movie VALUES
+(1, N'Bố Già', N'C13', '2021-03-05', 128, 8.7, N'Hài, Tâm lý', N'Việt Nam', N'Phim về gia đình Việt Nam', N'Tuấn Trần Production', N'Việt Nam', N'Trấn Thành'),
+(2, N'Mắt Biếc', N'C16', '2019-12-20', 115, 8.5, N'Tình cảm', N'Việt Nam', N'Chuyển thể từ truyện Nguyễn Nhật Ánh', N'Galaxy Studio', N'Việt Nam', N'Victor Vũ'),
+(3, N'Lật Mặt 6', N'C18', '2023-04-28', 132, 8.0, N'Hành động', N'Việt Nam', N'Hành trình cứu người', N'Ly Hai Production', N'Việt Nam', N'Lý Hải'),
+(4, N'Avengers: Endgame', N'C13', '2019-04-26', 182, 9.0, N'Hành động', N'English', N'Theo truyện Marvel', N'Marvel Studio', N'Mỹ', N'Russo Brothers'),
+(5, N'Frozen 2', N'P', '2019-11-22', 103, 7.5, N'Hoạt hình', N'English', N'Phiêu lưu', N'Disney', N'Mỹ', N'Jennifer Lee');
 -----------------------------------------------------
 -- 8. SHOWTIME
 -----------------------------------------------------
-INSERT INTO Showtime
-(ShowtimeID, MovieID, RoomID, CinemaID, StartTime, EndTime, Date, BasePriceMultiplier)
-VALUES
-(1, 1, 1, 1, '10:00', '12:00', '2024-11-20', 1.0),
-(2, 2, 2, 2, '13:00', '15:00', '2024-11-20', 1.2),
-(3, 3, 3, 3, '16:00', '18:00', '2024-11-20', 1.5),
-(4, 4, 1, 1, '18:00', '19:30', '2024-11-20', 1.1),
-(5, 5, 3, 3, '20:00', '21:45', '2024-11-20', 1.3);
-
-
+INSERT INTO Showtime VALUES
+(1, 1, 1, 1, '10:00', '12:00', '2024-12-10'),
+(2, 1, 2, 1, '13:00', '15:00', '2024-12-10'),
+(3, 2, 3, 1, '16:00', '18:00', '2024-12-10'),
+(4, 3, 4, 2, '19:00', '22:00', '2024-12-11'),
+(5, 4, 5, 3, '14:00', '16:00', '2024-12-12'),
+(6, 5, 1, 4, '09:00', '11:00', '2024-12-10'),
+(7, 6, 2, 5, '20:00', '22:00', '2024-12-11');
 -----------------------------------------------------
 -- 9. EMPLOYEE
 -----------------------------------------------------
-INSERT INTO Employee
-(EmployeeID, CinemaID, FullName, Email, Address, DateOfBirth, Sex, Salary, SupervisorID)
-VALUES
-(1, 1, N'Nhân viên A', 'emp01@example.com', N'Địa chỉ 1', '1990-01-01', N'Nam', 12000000, NULL),
-(2, 1, N'Nhân viên B', 'emp02@example.com', N'Địa chỉ 2', '1991-02-02', N'Nữ', 11000000, 1),
-(3, 2, N'Nhân viên C', 'emp03@example.com', N'Địa chỉ 3', '1992-03-03', N'Nam', 10000000, 1),
-(4, 3, N'Nhân viên D', 'emp04@example.com', N'Địa chỉ 4', '1993-04-04', N'Nữ', 13000000, 1),
-(5, 4, N'Nhân viên E', 'emp05@example.com', N'Địa chỉ 5', '1994-05-05', N'Nam',  9000000, 1);
-
-
+INSERT INTO Employee VALUES
+(1, 1, N'Nguyễn Hữu Tín', N'tin@cgv.vn', N'12 Lê Lợi, Q1, HCM', '1990-01-10', N'Nam', 12000000, NULL),
+(2, 1, N'Lê Thị Hồng', N'hong@cgv.vn', N'14 Lê Lợi, Q1, HCM', '1995-03-22', N'Nữ', 9000000, 1),
+(3, 2, N'Trần Đăng Khoa', N'khoa@galaxy.vn', N'20 Nguyễn Du, Q1, HCM', '1992-09-12', N'Nam', 11000000, NULL),
+(4, 3, N'Phạm Nhật Minh', N'minh@lotte.vn', N'50 Quang Trung, Gò Vấp', '1998-07-08', N'Nam', 8000000, 3),
+(5, 4, N'Lê Thu Hà', N'ha@bhd.vn', N'5 Hải Triều, Q1, HCM', '1996-12-18', N'Nữ', 8500000, NULL);
 -----------------------------------------------------
 -- 10. VOUCHER
 -----------------------------------------------------
-INSERT INTO Voucher
-(VoucherID, Code, Description, Type, Discount, Amount, IssueDate, ExpirationDate,
- MaxUsage, UsedCount, IsActive, MinOrderValue, MaxDiscountValue, IsStackable)
-VALUES
-(1, N'VC10', N'Giảm 10%', N'PERCENT', 10, NULL, '2024-01-01','2024-12-31', 100, 0, 1,  50000, 20000, 0),
-(2, N'VC20', N'Giảm 20%', N'PERCENT', 20, NULL, '2024-01-01','2024-12-31', 100, 0, 1, 100000, 30000, 0),
-(3, N'FIX50',N'Giảm 50K', N'FIXED',   NULL, 50000,'2024-01-01','2024-12-31', 200, 0, 1, 100000, 50000, 0),
-(4, N'ST15', N'SV 15%',   N'PERCENT', 15, NULL, '2024-01-01','2024-12-31', 150, 0, 1,  30000, 20000, 1),
-(5, N'EARLY30',N'Early 30K',N'FIXED', NULL,30000,'2024-01-01','2024-06-30', 50,  0, 1,      0, 30000, 0);
-
-
+INSERT INTO Voucher VALUES
+(1, N'SALE50', N'Giảm 50%', N'Percent', 50, NULL, '2024-01-01', '2024-12-31', 1000, 200, 1, 100000, 50000, 0),
+(2, N'NEWCUSTOMER', N'Giảm cho khách mới', N'Fixed', NULL, 30000, '2024-01-01', '2024-06-30', 500, 50, 1, 50000, 30000, 1),
+(3, N'TET2024', N'Khuyến mãi Tết', N'Percent', 20, NULL, '2024-01-15', '2024-02-15', 300, 80, 1, 80000, 40000, 1),
+(4, N'HSSV', N'Học sinh sinh viên', N'Percent', 15, NULL, '2024-03-01', '2024-12-01', 500, 120, 1, 50000, 20000, 1),
+(5, N'WEEKEND20', N'Giảm 20% cuối tuần', N'Percent', 20, NULL,'2024-01-01', '2024-12-31', 500, 100, 1, 100000, 40000, 1),
+(6, N'HAPPYHOUR', N'Khuyến mãi giờ vàng 14h–17h', N'Percent', 25, NULL,'2024-01-15', '2024-06-30', 400, 90, 1, 80000, 50000, 0);
 -----------------------------------------------------
 -- 11. CUSTOMER–VOUCHER
 -----------------------------------------------------
-INSERT INTO CustomerVoucher (CustomerID, VoucherID, AssignedDate)
-VALUES
-(1, 1, '2024-06-01'),
-(2, 2, '2024-06-02'),
-(3, 3, '2024-06-03'),
-(4, 4, '2024-06-04'),
-(5, 5, '2024-06-05');
-
-
+INSERT INTO CustomerVoucher VALUES
+(1, 1, '2024-01-10'),
+(1, 2, '2024-02-11'),
+(2, 1, '2024-03-12'),
+(3, 3, '2024-01-20'),
+(4, 4, '2024-03-22'),
+(5, 2, '2024-04-01');
 -----------------------------------------------------
 -- 12. FOOD & DRINK
 -----------------------------------------------------
-INSERT INTO FoodAndDrink (ItemID, Name, Size, Price, IsAvailable, StockQuantity)
-VALUES
-(1, N'Bắp nhỏ', N'Nhỏ', 30000, 1, 100),
-(2, N'Bắp vừa', N'Vừa', 45000, 1, 80),
-(3, N'Nước ngọt', N'Lớn', 25000, 1, 200),
-(4, N'Nước suối', N'Nhỏ', 10000, 1, 300),
-(5, N'Combo', N'Vừa', 70000, 1, 50);
-
-
+INSERT INTO FoodAndDrink VALUES
+(1, N'Bắp rang bơ', N'L', 45000, 1, 200),
+(2, N'Coca Cola', N'M', 30000, 1, 500),
+(3, N'Pepsi', N'M', 30000, 1, 450),
+(4, N'Nước suối', N'S', 15000, 1, 600),
+(5, N'Combo Bắp + Nước', N'L', 70000, 1, 150);
 -----------------------------------------------------
 -- 13. ORDERS
 -----------------------------------------------------
-INSERT INTO Orders
-(OrderID, CustomerID, Date, Time, TotalPrice, Status, PaymentMethod, VoucherID)
-VALUES
-(1, 1,'2024-11-20','10:00',100000,N'Hoàn thành',N'Tiền mặt',1),
-(2, 2,'2024-11-20','12:00',150000,N'Hoàn thành',N'Thẻ',2),
-(3, 3,'2024-11-20','14:00', 80000,N'Xử lý',     N'Ví',NULL),
-(4, 4,'2024-11-20','16:00',200000,N'Hoàn thành',N'Ví',3),
-(5, 5,'2024-11-20','18:00', 90000,N'Xử lý',     N'Tiền mặt',NULL);
-
-
+INSERT INTO Orders VALUES
+(1, 1, '2024-12-10', '09:50', 180000, N'Hoàn tất', N'MoMo', 1),
+(2, 2, '2024-12-10', '13:20', 220000, N'Hoàn tất', N'ZaloPay', NULL),
+(3, 3, '2024-12-11', '16:20', 150000, N'Đang xử lý', N'Tiền mặt', 3),
+(4, 4, '2024-12-11', '19:10', 200000, N'Hoàn tất', N'MoMo', 4),
+(5, 5, '2024-12-12', '14:20', 250000, N'Hủy', N'Visa', NULL);
 -----------------------------------------------------
 -- 14. ORDER–FOOD
 -----------------------------------------------------
-INSERT INTO OrderFoodDrink (OrderID, ItemID, Quantity)
-VALUES
+INSERT INTO OrderFoodDrink VALUES
 (1, 1, 1),
-(1, 3, 2),
+(1, 2, 2),
 (2, 5, 1),
-(3, 2, 1),
-(4, 4, 2);
-
-
+(3, 4, 1),
+(4, 2, 2),
+(5, 3, 1),
+(5, 4, 1);
 -----------------------------------------------------
 -- 15. MOVIE–CUSTOMER RATING
 -----------------------------------------------------
-INSERT INTO MovieCustomerRating (MovieID, CustomerID, RatingDate, Score, Comment)
-VALUES
-(1, 1,'2024-11-21',8,N'Hay'),
-(2, 2,'2024-11-21',9,N'Rất tốt'),
-(3, 3,'2024-11-21',7,N'Ổn'),
-(4, 4,'2024-11-21',8,N'OK'),
-(5, 5,'2024-11-21',9,N'Tuyệt');
-
-
+INSERT INTO MovieCustomerRating VALUES
+(1, 1, '2024-12-10', 9, N'Rất cảm động'),
+(1, 2, '2024-12-11', 8, N'Hay'),
+(2, 3, '2024-12-10', 10, N'Tuyệt vời'),
+(3, 4, '2024-12-12', 7, N'Ổn'),
+(4, 5, '2024-12-12', 9, N'Đỉnh cao');
 -----------------------------------------------------
 -- 16. TICKET
 -----------------------------------------------------
-INSERT INTO Ticket (TicketID, OrderID, ShowtimeID, SeatNumber, RoomID, Price)
-VALUES
-(1, 1, 1, N'A1', 1, 70000),
-(2, 1, 1, N'A2', 1, 70000),
-(3, 2, 2, N'B1', 2, 90000),
-(4, 4, 3, N'C1', 3,120000),
-(5, 5, 5, N'D1', 3, 80000);
+INSERT INTO Ticket VALUES
+(1, 1, 1, N'A1', 1, 90000),
+(2, 1, 1, N'A2', 1, 90000),
+(3, 2, 2, N'C1', 2, 100000),
+(4, 3, 3, N'D1', 3, 130000),
+(5, 4, 4, N'E1', 4, 150000),
+(6, 5, 5, N'C2', 2, 100000);
