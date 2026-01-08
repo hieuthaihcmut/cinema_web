@@ -65,7 +65,7 @@ router.post("/", async (req, res) => {
         request.input("PhoneNumber", sql.NVarChar(15), PhoneNumber);
         request.input("DateOfBirth", sql.Date, DateOfBirth);
         request.input("MembershipLevel", sql.NVarChar(20), MembershipLevel);
-        request.input("RegistrationDate", sql.Date, RegistrationDate || null);
+        request.input("RegistrationDate", sql.Date, RegistrationDate || Date().toISOString().split('T')[0]);
         request.input("TotalSpent", sql.Decimal(18, 2), TotalSpent || 0);
         request.input("TotalOrders", sql.Int, TotalOrders || 0);
         request.output("ErrorMessage", sql.NVarChar(200));

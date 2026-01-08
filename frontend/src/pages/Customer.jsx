@@ -272,17 +272,6 @@ export default function CustomerManagement() {
             errors.MembershipLevel = "Loại thành viên không hợp lệ";
         }
 
-        // RegistrationDate
-        if (!form.RegistrationDate) {
-            errors.RegistrationDate = "Ngày đăng ký là bắt buộc";
-        } else {
-            const reg = new Date(form.RegistrationDate);
-            const today = new Date();
-            if (reg > today) {
-                errors.RegistrationDate = "Ngày đăng ký không được lớn hơn hôm nay";
-            }
-        }
-
         // TotalSpent
         if (form.TotalSpent === "" || form.TotalSpent === null) {
             errors.TotalSpent = "Tổng chi tiêu là bắt buộc";

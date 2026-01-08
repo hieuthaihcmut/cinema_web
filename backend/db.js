@@ -14,15 +14,14 @@ const config = {
     }
 };
 
-// tạo 1 pool duy nhất, dùng lại nhiều lần
 const poolPromise = new sql.ConnectionPool(config)
     .connect()
     .then(pool => {
-        console.log('✅ SQL Server connected');
+        console.log(' SQL Server connected');
         return pool;
     })
     .catch(err => {
-        console.error('❌ SQL connection error:', err);
+        console.error(' SQL connection error:', err);
         throw err;
     });
 
